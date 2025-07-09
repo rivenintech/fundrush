@@ -3,7 +3,7 @@ import { Campaign } from "@/app/campaigns/campaign";
 import { GRAPHQL_URL } from "@/lib/graphql-queries";
 import { QueryClient } from "@tanstack/react-query";
 import request from "graphql-request";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 const query = graphql(`
   query Category($where: CategoryFilters, $orderBy: CampaignOrderBy) {
@@ -48,7 +48,7 @@ async function fetchCategoryData(categoryId: string) {
 
 type Props = { params: Promise<{ categoryId: string }> };
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { categoryId } = await params;
   const categorySingle = await fetchCategoryData(categoryId);
 
