@@ -6,7 +6,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatCurrency, getTimeAgo } from "@/lib/formatters";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, HeartHandshake } from "lucide-react";
-import Lightbox, { SlideImage } from "yet-another-react-lightbox";
+import Image from "next/image";
+import Lightbox, {
+  ContainerRect,
+  isImageFitCover,
+  isImageSlide,
+  SlideImage,
+  useLightboxProps,
+} from "yet-another-react-lightbox";
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
@@ -178,6 +185,41 @@ export function CampaignImages({ images }: { images: SlideImage[] }) {
       }}
       styles={{ slide: { padding: 0, borderRadius: "0.5rem" } }}
       slides={images}
+      render={{ slide: NextJsImage }}
+    />
+  );
+}
+
+function isNextJsImage(slide: SlideImage) {
+  return isImageSlide(slide) && typeof slide.width === "number" && typeof slide.height === "number";
+}
+
+export default function NextJsImage({ slide, rect }: { slide: SlideImage; rect: ContainerRect }) {
+  const {
+    on: { click },
+    carousel: { imageFit },
+  } = useLightboxProps();
+
+  const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
+
+  if (!isNextJsImage(slide)) return undefined;
+
+  const width = !cover ? Math.round(Math.min(rect.width, (rect.height / slide.height) * slide.width)) : rect.width;
+
+  return (
+    <Image
+      alt={slide.alt || ""}
+      src={slide.src}
+      width={slide.width}
+      height={slide.height}
+      draggable={false}
+      placeholder={slide.blurDataURL ? "blur" : undefined}
+      blurDataURL={slide.blurDataURL || undefined}
+      style={{
+        objectFit: cover ? "cover" : "contain",
+        cursor: click ? "pointer" : undefined,
+      }}
+      sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
     />
   );
 }

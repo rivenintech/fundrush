@@ -1,4 +1,4 @@
-import { Campaign } from "@/app/campaigns/campaign";
+import { Campaign } from "@/app/(main)/campaigns/campaign";
 import { db } from "@/db/client";
 import { Metadata } from "next";
 

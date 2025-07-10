@@ -5,13 +5,13 @@ import { db } from "@/db/client";
 import { CheckCircle, HeartHandshake, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Image1 from "../../public/images/1.jpg";
-import Image2 from "../../public/images/2.jpg";
-import Image3 from "../../public/images/3.jpg";
-import Image4 from "../../public/images/4.jpg";
-import Image5 from "../../public/images/5.jpg";
-import Image6 from "../../public/images/6.jpg";
-import Image7 from "../../public/images/7.jpg";
+import Image1 from "../../../public/images/1.jpg";
+import Image2 from "../../../public/images/2.jpg";
+import Image3 from "../../../public/images/3.jpg";
+import Image4 from "../../../public/images/4.jpg";
+import Image5 from "../../../public/images/5.jpg";
+import Image6 from "../../../public/images/6.jpg";
+import Image7 from "../../../public/images/7.jpg";
 import { Campaign } from "./campaigns/campaign";
 
 const faq = [
