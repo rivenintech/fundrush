@@ -7,7 +7,7 @@ const config: CodegenConfig = {
     "./src/__generated__/graphql/": {
       preset: "client",
       config: {
-        avoidOptionals: true,
+        avoidOptionals: false,
       },
     },
   },
