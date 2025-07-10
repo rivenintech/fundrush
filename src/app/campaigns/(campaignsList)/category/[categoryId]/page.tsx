@@ -1,46 +1,27 @@
-import { graphql } from "@/__generated__/graphql";
 import { Campaign } from "@/app/campaigns/campaign";
-import { GRAPHQL_URL } from "@/lib/graphql-queries";
-import { QueryClient } from "@tanstack/react-query";
-import request from "graphql-request";
+import { db } from "@/db/client";
 import { Metadata } from "next";
 
-const query = graphql(`
-  query Category($where: CategoryFilters, $orderBy: CampaignOrderBy) {
-    categorySingle(where: $where) {
-      id
-      name
-      campaigns(orderBy: $orderBy) {
-        id
-        title
-        goal
-        donations {
-          amount
-        }
-      }
-    }
-  }
-`);
-
 async function fetchCategoryData(categoryId: string) {
-  const queryClient = new QueryClient();
-
-  const { categorySingle } = await queryClient.fetchQuery({
-    queryKey: ["categorySingle", categoryId],
-    queryFn: async () =>
-      await request(GRAPHQL_URL, query, {
-        where: {
-          id: {
-            eq: categoryId,
+  const categorySingle = await db.query.category.findFirst({
+    with: {
+      campaigns: {
+        columns: {
+          id: true,
+          title: true,
+          goal: true,
+        },
+        with: {
+          donations: {
+            columns: {
+              amount: true,
+            },
           },
         },
-        orderBy: {
-          createdAt: {
-            direction: "desc",
-            priority: 0,
-          },
-        },
-      }),
+        orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
+      },
+    },
+    where: (category, { eq }) => eq(category.id, categoryId),
   });
 
   return categorySingle;

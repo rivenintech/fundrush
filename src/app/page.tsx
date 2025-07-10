@@ -1,10 +1,7 @@
-import { graphql } from "@/__generated__/graphql";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Spotlight } from "@/components/ui/spotlight-new";
-import { GRAPHQL_URL } from "@/lib/graphql-queries";
-import { QueryClient } from "@tanstack/react-query";
-import request from "graphql-request";
+import { db } from "@/db/client";
 import { CheckCircle, HeartHandshake, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,34 +51,22 @@ const faq = [
   },
 ];
 
-const query = graphql(`
-  query RecentCampaigns($limit: Int, $orderBy: CampaignOrderBy) {
-    campaign(limit: $limit, orderBy: $orderBy) {
-      id
-      title
-      donations {
-        amount
-      }
-      goal
-    }
-  }
-`);
-
 export default async function Home() {
-  const queryClient = new QueryClient();
-
-  const { campaign: recentCampaigns } = await queryClient.fetchQuery({
-    queryKey: ["recentCampaigns"],
-    queryFn: async () =>
-      await request(GRAPHQL_URL, query, {
-        limit: 10,
-        orderBy: {
-          createdAt: {
-            priority: 0,
-            direction: "desc",
-          },
+  const recentCampaigns = await db.query.campaign.findMany({
+    columns: {
+      id: true,
+      title: true,
+      goal: true,
+    },
+    with: {
+      donations: {
+        columns: {
+          amount: true,
         },
-      }),
+      },
+    },
+    orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
+    limit: 10,
   });
 
   return (

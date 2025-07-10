@@ -1,43 +1,28 @@
-import { graphql } from "@/__generated__/graphql";
-import { GRAPHQL_URL } from "@/lib/graphql-queries";
-import { QueryClient } from "@tanstack/react-query";
-import request from "graphql-request";
+import { db } from "@/db/client";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Campaign } from "../campaign";
 
-const query = graphql(`
-  query categoriesWithCampaigns($limit: Int, $orderBy: CampaignOrderBy) {
-    category {
-      name
-      id
-      campaigns(limit: $limit, orderBy: $orderBy) {
-        id
-        goal
-        donations {
-          amount
-        }
-        title
-      }
-    }
-  }
-`);
-
 export default async function Page() {
-  const queryClient = new QueryClient();
-
-  const { category: categories } = await queryClient.fetchQuery({
-    queryKey: ["categoriesWithCampaigns"],
-    queryFn: async () =>
-      await request(GRAPHQL_URL, query, {
-        limit: 3,
-        orderBy: {
-          createdAt: {
-            direction: "desc",
-            priority: 0,
+  const categories = await db.query.category.findMany({
+    with: {
+      campaigns: {
+        columns: {
+          id: true,
+          title: true,
+          goal: true,
+        },
+        with: {
+          donations: {
+            columns: {
+              amount: true,
+            },
           },
         },
-      }),
+        orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
+        limit: 3,
+      },
+    },
   });
 
   return (

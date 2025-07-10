@@ -1,44 +1,33 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Check, Link } from "lucide-react";
 
-import { graphql } from "@/__generated__/graphql";
-import { GRAPHQL_URL } from "@/lib/graphql-queries";
-import request from "graphql-request";
+import { db } from "@/db/client";
 import { Metadata } from "next";
 import { CampaignImages, CampaignTabs, DonationsProgress, RecentDonations } from "./components";
 import { requestDonationProgress, requestRecentDonations } from "./sharedQueries";
 
-const query = graphql(`
-  query CampaignSingle($where: CampaignFilters) {
-    campaignSingle(where: $where) {
-      id
-      title
-      about
-      faq
-      goal
-      category {
-        name
-      }
-      author {
-        name
-      }
-    }
-  }
-`);
-
 async function fetchCampaignData(campaignId: string) {
-  const queryClient = new QueryClient();
-
-  const { campaignSingle } = await queryClient.fetchQuery({
-    queryKey: ["campaign", campaignId],
-    queryFn: () =>
-      request(GRAPHQL_URL, query, {
-        where: {
-          id: {
-            eq: Number(campaignId),
-          },
+  const campaignSingle = await db.query.campaign.findFirst({
+    columns: {
+      id: true,
+      title: true,
+      about: true,
+      faq: true,
+      goal: true,
+    },
+    with: {
+      category: {
+        columns: {
+          name: true,
         },
-      }),
+      },
+      author: {
+        columns: {
+          name: true,
+        },
+      },
+    },
+    where: (campaign, { eq }) => eq(campaign.id, Number(campaignId)),
   });
 
   return campaignSingle;
