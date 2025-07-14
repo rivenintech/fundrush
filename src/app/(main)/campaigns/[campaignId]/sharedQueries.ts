@@ -1,5 +1,5 @@
 import { graphql } from "@/__generated__/graphql";
-import { GRAPHQL_URL } from "@/lib/graphql-queries";
+import { GRAPHQL_URL } from "@/lib/get-urls";
 import request from "graphql-request";
 
 export const requestDonationProgress = async (id: string) => {

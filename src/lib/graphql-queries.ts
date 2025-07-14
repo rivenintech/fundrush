@@ -1,7 +1,6 @@
 import { graphql } from "@/__generated__/graphql/gql";
 import request from "graphql-request";
-
-export const GRAPHQL_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/graphql`;
+import { GRAPHQL_URL } from "./get-urls";
 
 export const requestCampaigns = async (limit: number | null = null) => {
   const query = graphql(`
