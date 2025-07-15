@@ -40,6 +40,8 @@ export const category = pgTable(
   {
     id: varchar({ length: 50 }).primaryKey(),
     name: text().notNull(),
+    short_description: text().notNull(),
+    description: text().notNull(),
   },
   (table) => [check("id_regex_check", sql`${table.id} ~ '^[a-z0-9_-]+$'`)],
 );

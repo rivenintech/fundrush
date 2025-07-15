@@ -4,32 +4,37 @@ import Link from "next/link";
 import { Campaign } from "../campaign";
 
 export default async function Page() {
-  const categories = await db.query.category.findMany({
-    with: {
-      campaigns: {
-        columns: {
-          id: true,
-          title: true,
-          goal: true,
-        },
-        with: {
-          donations: {
-            columns: {
-              amount: true,
+  const categories = (
+    await db.query.category.findMany({
+      with: {
+        campaigns: {
+          columns: {
+            id: true,
+            title: true,
+            goal: true,
+          },
+          with: {
+            donations: {
+              columns: {
+                amount: true,
+              },
             },
           },
+          orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
+          limit: 3,
         },
-        orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
-        limit: 3,
       },
-    },
-  });
+    })
+  ).filter((category) => category.campaigns.length > 0);
 
   return (
     <>
       {categories.map((category) => (
-        <section className="space-y-3 border-b border-neutral-400 py-3" key={category.id}>
-          <h2 className="text-2xl font-bold">{category.name} Campaigns</h2>
+        <section className="space-y-3 border-b border-neutral-400 px-6" key={category.id}>
+          <div>
+            <h2 className="text-2xl font-bold">{category.name} Campaigns</h2>
+            <p className="mt-1.5 text-sm text-neutral-400">{category.short_description}</p>
+          </div>
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {category.campaigns.map((campaign) => (
               <Campaign

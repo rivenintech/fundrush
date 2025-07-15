@@ -1,6 +1,7 @@
 import { Campaign } from "@/app/(main)/campaigns/campaign";
 import { db } from "@/db/client";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 async function fetchCategoryData(categoryId: string) {
   const categorySingle = await db.query.category.findFirst({
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: categorySingle?.name,
-    // description: categorySingle.description, TODO
+    description: categorySingle?.short_description,
   };
 }
 
@@ -44,13 +45,17 @@ export default async function Page({ params }: Props) {
   const categorySingle = await fetchCategoryData(categoryId);
 
   if (!categorySingle) {
-    return <div className="text-center text-2xl">Category not found</div>;
+    notFound();
   }
 
   return (
-    <section className="space-y-3 border-b border-neutral-400 py-3" key={categorySingle.id}>
-      <h2 className="text-2xl font-bold">{categorySingle.name} Campaigns</h2>
-      <div className="grid grid-cols-3 gap-3">
+    <section className="space-y-3 px-6">
+      <div>
+        <h1 className="text-center text-2xl font-bold md:text-4xl">{categorySingle.name} Campaigns</h1>
+        <p className="mt-1.5 text-center text-sm text-neutral-400 md:hidden">{categorySingle.short_description}</p>
+      </div>
+      <p className="hidden text-center text-neutral-400 md:block">{categorySingle.description}</p>
+      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {categorySingle.campaigns.map((campaign) => (
           <Campaign
             key={campaign.id}
