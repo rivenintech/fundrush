@@ -1,7 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Spotlight } from "@/components/ui/spotlight-new";
-import { db } from "@/db/client";
 import { CheckCircle, HeartHandshake, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +10,7 @@ import Image4 from "../../../public/images/4.jpg";
 import Image5 from "../../../public/images/5.jpg";
 import Image6 from "../../../public/images/6.jpg";
 import Image7 from "../../../public/images/7.jpg";
-import { Campaign } from "./campaigns/campaign";
+import RecentCampaigns from "./components/recent-campaigns";
 
 const faq = [
   {
@@ -52,23 +50,6 @@ const faq = [
 ];
 
 export default async function Home() {
-  const recentCampaigns = await db.query.campaign.findMany({
-    columns: {
-      id: true,
-      title: true,
-      goal: true,
-    },
-    with: {
-      donations: {
-        columns: {
-          amount: true,
-        },
-      },
-    },
-    orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
-    limit: 10,
-  });
-
   return (
     <main className="space-y-20">
       <section className="relative flex h-[calc(100vh-6rem)] max-h-[900px] min-h-[500px] flex-col justify-between space-y-10 overflow-hidden">
@@ -177,26 +158,7 @@ export default async function Home() {
             <h3 className="text-3xl font-bold tracking-wider md:text-4xl">Recent Campaigns</h3>
             <p className="text-neutral-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           </div>
-          <Carousel>
-            <CarouselContent>
-              {recentCampaigns?.map((campaign) => (
-                <CarouselItem className="md:basis-1/3" key={campaign.id}>
-                  <Campaign
-                    data={{
-                      id: campaign.id,
-                      title: campaign.title,
-                      // TODO: change this when https://github.com/drizzle-team/drizzle-graphql/issues/14
-                      raised: campaign.donations.reduce((acc, donation) => acc + donation.amount, 0),
-                      goal: campaign.goal,
-                      amount: campaign.donations.length,
-                    }}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:inline-flex" />
-            <CarouselNext className="hidden md:inline-flex" />
-          </Carousel>
+          <RecentCampaigns />
         </div>
       </section>
       <section className="relative flex h-[40rem] items-center justify-center overflow-hidden">

@@ -1,9 +1,15 @@
 import { db } from "@/db/client";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { connection } from "next/server";
 import { Campaign } from "../campaign";
 
 export default async function Page() {
+  // Prevent static rendering at build time
+  // This is necessary to ensure database data is fetched at runtime
+  // https://nextjs.org/docs/app/api-reference/functions/connection
+  await connection();
+
   const categories = (
     await db.query.category.findMany({
       with: {
