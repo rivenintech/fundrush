@@ -1,6 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
 import { db } from "@/db/client";
+import { User2 } from "lucide-react";
 import { Metadata } from "next";
 import { CampaignImages, CampaignTabs, RecentDonations } from "./components";
 import { DonatePanelDesktop, DonatePanelMobile } from "./donate-panel";
@@ -97,8 +98,8 @@ export default async function Page({ params }: Props) {
           />
         </div>
         <DonatePanelMobile campaignId={campaignId} title={campaignSingle.title} />
-        <div className="flex items-center gap-3 border-b border-neutral-800 pb-6">
-          <div className="size-6 rounded-full bg-green-500"></div>
+        <div className="flex items-center gap-1.5 border-b border-neutral-800 pb-6">
+          <User2 size="28" className="rounded-full bg-neutral-800 p-1.5" />
           <p className="text-neutral-400">
             <span className="font-semibold text-white">{campaignSingle.author?.name}</span> created this fundraiser.
           </p>

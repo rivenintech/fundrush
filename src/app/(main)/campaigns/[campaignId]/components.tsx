@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatCurrency, getTimeAgo } from "@/lib/formatters";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, HeartHandshake } from "lucide-react";
+import { ArrowRight, HandHeart, HeartHandshake } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import Lightbox, {
@@ -81,7 +81,7 @@ export function RecentDonations({ campaignId }: { campaignId: string }) {
       <ul className="space-y-4">
         {donations?.map((donation) => (
           <li className="flex items-center gap-3" key={donation.id}>
-            <div className="size-8 rounded-full bg-green-500" />
+            <HandHeart size="36" className="rounded-full p-1.5 text-green-500" />
             <div>
               <p className="font-semibold">{donation.name}</p>
               <p className="text-xs text-neutral-400">Donated {getTimeAgo(donation.donatedAt)}</p>
@@ -118,7 +118,7 @@ export function RecentDonationsSheet({ campaignId }: { campaignId: string }) {
         <ul className="mx-4 space-y-4">
           {donations?.map((donation) => (
             <li className="flex items-center gap-3" key={donation.id}>
-              <div className="size-8 rounded-full bg-green-500" />
+              <HandHeart size="36" className="rounded-full p-1.5 text-green-500" />
               <div>
                 <p className="font-semibold">{donation.name}</p>
                 <p className="text-xs text-neutral-400">Donated {getTimeAgo(donation.donatedAt)}</p>
