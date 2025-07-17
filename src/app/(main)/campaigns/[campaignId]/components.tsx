@@ -7,11 +7,13 @@ import { formatCurrency, getTimeAgo } from "@/lib/formatters";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, HeartHandshake } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 import Lightbox, {
   ContainerRect,
   isImageFitCover,
   isImageSlide,
   SlideImage,
+  ThumbnailsRef,
   useLightboxProps,
 } from "yet-another-react-lightbox";
 import Inline from "yet-another-react-lightbox/plugins/inline";
@@ -177,9 +179,26 @@ export function DonationsProgress({ campaignId }: { campaignId: string }) {
 }
 
 export function CampaignImages({ images }: { images: SlideImage[] }) {
+  const thumbnailsRef = useRef<ThumbnailsRef>(null);
+
+  // On mobile screens, hide the thumbnails
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 768) {
+        thumbnailsRef.current?.hide();
+      } else {
+        thumbnailsRef.current?.show();
+      }
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <Lightbox
       plugins={[Inline, Thumbnails]}
+      thumbnails={{ ref: thumbnailsRef }}
       inline={{
         style: { width: "100%", aspectRatio: "4 / 3" },
       }}
