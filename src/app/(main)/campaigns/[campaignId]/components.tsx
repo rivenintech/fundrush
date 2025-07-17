@@ -143,6 +143,7 @@ export function DonationsProgress({ campaignId }: { campaignId: string }) {
   if (!campaign) return null;
 
   const raised = campaign.donations.reduce((acc, donation) => acc + donation.amount, 0);
+  const percentage = (raised / campaign.goal) * 100;
 
   return (
     <div className="space-y-2">
@@ -156,11 +157,11 @@ export function DonationsProgress({ campaignId }: { campaignId: string }) {
         <div
           className="flex h-full items-center justify-center overflow-hidden rounded-lg bg-green-500 text-white transition-all"
           style={{
-            width: `${(raised / campaign.goal) * 100}%`,
+            width: `${percentage}%`,
             transitionDuration: "2500ms",
           }}
         >
-          <span className="font-semibold">{(raised / campaign.goal) * 100}%</span>
+          {percentage >= 5 && <span className="font-semibold">{percentage.toFixed(0)}%</span>}
         </div>
       </div>
       <div className="flex items-baseline justify-end gap-1 text-sm">
