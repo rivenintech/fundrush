@@ -23,10 +23,10 @@ export const requestDonationProgress = async (id: string) => {
   });
 };
 
-export const requestRecentDonations = async (id: string) => {
+export const requestRecentDonations = async (id: string, limit: number, offset: number) => {
   const query = graphql(`
-    query Donations($limit: Int, $offset: Int, $where: DonationsFilters) {
-      donations(limit: $limit, offset: $offset, where: $where) {
+    query Donations($limit: Int, $offset: Int, $where: DonationsFilters, $orderBy: DonationsOrderBy) {
+      donations(limit: $limit, offset: $offset, where: $where, orderBy: $orderBy) {
         amount
         donatedAt
         id
@@ -41,7 +41,13 @@ export const requestRecentDonations = async (id: string) => {
         eq: Number(id),
       },
     },
-    limit: 1,
-    offset: null,
+    limit: limit,
+    offset: offset,
+    orderBy: {
+      donatedAt: {
+        direction: "desc",
+        priority: 1,
+      },
+    },
   });
 };

@@ -1,10 +1,11 @@
 "use client";
 
+import { DonationsQuery } from "@/__generated__/graphql/graphql";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatCurrency, getTimeAgo } from "@/lib/formatters";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { ArrowRight, HandHeart, HeartHandshake } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -62,24 +63,28 @@ export function CampaignTabs({ about, faq }: Props) {
 }
 
 export function RecentDonations({ campaignId }: { campaignId: string }) {
-  const { data } = useQuery({
+  const increment = 5;
+
+  const { data, error, fetchNextPage, isFetching } = useInfiniteQuery({
     queryKey: ["donations", campaignId],
-    queryFn: () => requestRecentDonations(campaignId),
+    queryFn: ({ pageParam }) => requestRecentDonations(campaignId, increment, pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages, lastPageParam) => lastPageParam + increment,
   });
 
-  const donations = data?.donations;
+  const donations = data?.pages?.flatMap((page) => page.donations) ?? [];
 
   return (
     <>
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-extrabold">Recent Donations</h2>
-          <RecentDonationsSheet campaignId={campaignId} />
+          <RecentDonationsSheet donations={donations} isFetching={isFetching} fetchNextPage={fetchNextPage} />
         </div>
         <p className="text-sm text-neutral-400">Lorem ipsum dolor sit amet consectetur.</p>
       </div>
       <ul className="space-y-4">
-        {donations?.map((donation) => (
+        {donations?.slice(0, 5).map((donation) => (
           <li className="flex items-center gap-3" key={donation.id}>
             <HandHeart size="36" className="rounded-full p-1.5 text-green-500" />
             <div>
@@ -94,15 +99,15 @@ export function RecentDonations({ campaignId }: { campaignId: string }) {
   );
 }
 
-export function RecentDonationsSheet({ campaignId }: { campaignId: string }) {
-  // TODO: Change to useInfiniteQuery
-  const { data } = useQuery({
-    queryKey: ["donations", campaignId],
-    queryFn: () => requestRecentDonations(campaignId),
-  });
-
-  const donations = data?.donations;
-
+export function RecentDonationsSheet({
+  donations,
+  isFetching,
+  fetchNextPage,
+}: {
+  donations: DonationsQuery["donations"];
+  isFetching: boolean;
+  fetchNextPage: () => void;
+}) {
   return (
     <Sheet>
       <SheetTrigger className="flex items-end gap-1 text-green-600">
@@ -127,6 +132,13 @@ export function RecentDonationsSheet({ campaignId }: { campaignId: string }) {
             </li>
           ))}
         </ul>
+        <button
+          className="m-4 rounded-lg bg-neutral-800 px-4 py-2 font-semibold text-white duration-200 hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-50"
+          onClick={fetchNextPage}
+          disabled={isFetching}
+        >
+          Load More
+        </button>
       </SheetContent>
     </Sheet>
   );
