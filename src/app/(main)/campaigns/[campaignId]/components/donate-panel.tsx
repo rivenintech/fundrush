@@ -1,7 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Check, Link } from "lucide-react";
-import { DonationsProgress } from "./components";
-import { requestDonationProgress } from "./sharedQueries";
+import { requestDonationProgress } from "../sharedQueries";
+import DonationsProgress from "./donation-progress";
 
 export async function DonatePanelDesktop({ campaignId, title }: { campaignId: string; title: string }) {
   const queryClient = new QueryClient();

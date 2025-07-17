@@ -3,8 +3,10 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { db } from "@/db/client";
 import { User2 } from "lucide-react";
 import { Metadata } from "next";
-import { CampaignImages, CampaignTabs, RecentDonations } from "./components";
-import { DonatePanelDesktop, DonatePanelMobile } from "./donate-panel";
+import CampaignTabs from "./components/campaign-info-tabs";
+import { DonatePanelDesktop, DonatePanelMobile } from "./components/donate-panel";
+import CampaignImages from "./components/image-carousel";
+import RecentDonations from "./components/recent-donations";
 
 async function fetchCampaignData(campaignId: string) {
   const campaignSingle = await db.query.campaign.findFirst({
