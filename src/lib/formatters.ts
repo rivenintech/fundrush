@@ -4,8 +4,13 @@ export function formatCurrency(amount: number) {
   const formatter = new Intl.NumberFormat(LOCALE, {
     style: "currency",
     currency: "USD",
-    trailingZeroDisplay: "stripIfInteger",
+    maximumFractionDigits: 2,
   });
+
+  // Remove .00 if present at the end
+  if (amount % 1 === 0) {
+    return formatter.format(amount).replace(/\.00$/, "");
+  }
 
   return formatter.format(amount);
 }
