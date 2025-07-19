@@ -1,21 +1,21 @@
 "use client";
 
+import { REMOTE_IMAGES_URL } from "@/lib/get-urls";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import Lightbox, {
-  ContainerRect,
-  isImageFitCover,
-  isImageSlide,
-  SlideImage,
-  ThumbnailsRef,
-  useLightboxProps,
-} from "yet-another-react-lightbox";
+import Lightbox, { ContainerRect, ThumbnailsRef, useLightboxProps } from "yet-another-react-lightbox";
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "yet-another-react-lightbox/styles.css";
 
-export default function CampaignImages({ images }: { images: SlideImage[] }) {
+type Image = {
+  pathname: string;
+  alt: string;
+  // blurDataUrl: string | null;
+};
+
+export default function CampaignImages({ images }: { images: Image[] }) {
   const thumbnailsRef = useRef<ThumbnailsRef>(null);
 
   // On mobile screens, hide the thumbnails
@@ -41,41 +41,35 @@ export default function CampaignImages({ images }: { images: SlideImage[] }) {
       }}
       styles={{ slide: { padding: 0, borderRadius: "0.5rem" } }}
       slides={images}
-      render={{ slide: NextJsImage }}
+      render={{ slide: NextJsImage, thumbnail: NextJsImage }}
     />
   );
 }
 
-function isNextJsImage(slide: SlideImage) {
-  return isImageSlide(slide) && typeof slide.width === "number" && typeof slide.height === "number";
-}
-
-function NextJsImage({ slide, rect }: { slide: SlideImage; rect: ContainerRect }) {
+// function NextJsImage({ slide, rect }: { slide: Image; rect: ContainerRect }) {
+function NextJsImage({ slide }: { slide: Image; rect: ContainerRect }) {
   const {
     on: { click },
-    carousel: { imageFit },
+    // carousel: { imageFit },
   } = useLightboxProps();
 
-  const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
+  // const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
 
-  if (!isNextJsImage(slide)) return undefined;
-
-  const width = !cover ? Math.round(Math.min(rect.width, (rect.height / slide.height) * slide.width)) : rect.width;
+  // const width = !cover ? Math.round(Math.min(rect.width, (rect.height / slide.height) * slide.width)) : rect.width;
 
   return (
     <Image
+      fill
       alt={slide.alt || ""}
-      src={slide.src}
-      width={slide.width}
-      height={slide.height}
+      src={`${REMOTE_IMAGES_URL}/${slide.pathname}`}
       draggable={false}
-      placeholder={slide.blurDataURL ? "blur" : undefined}
-      blurDataURL={slide.blurDataURL || undefined}
+      // placeholder={slide.blurDataURL ? "blur" : undefined}
+      // blurDataURL={slide.blurDataURL || undefined}
       style={{
-        objectFit: cover ? "cover" : "contain",
+        objectFit: "cover",
         cursor: click ? "pointer" : undefined,
       }}
-      sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
+      // sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
     />
   );
 }

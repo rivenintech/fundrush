@@ -18,6 +18,14 @@ async function fetchCategoryData(categoryId: string) {
               amount: true,
             },
           },
+          images: {
+            columns: {
+              pathname: true,
+              alt: true,
+              // blurDataUrl: true,
+            },
+            limit: 1, // Fetch only the cover image
+          },
         },
         orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
       },
@@ -65,6 +73,7 @@ export default async function Page({ params }: Props) {
               raised: campaign.donations.reduce((acc, donation) => acc + donation.amount, 0),
               goal: campaign.goal,
               amount: campaign.donations.length,
+              img: campaign.images[0],
             }}
           />
         ))}

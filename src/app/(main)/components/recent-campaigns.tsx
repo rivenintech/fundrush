@@ -21,6 +21,14 @@ export default async function RecentCampaigns() {
           amount: true,
         },
       },
+      images: {
+        columns: {
+          pathname: true,
+          alt: true,
+          // blurDataUrl: true,
+        },
+        limit: 1, // Fetch only the cover image
+      },
     },
     orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
     limit: 10,
@@ -39,6 +47,7 @@ export default async function RecentCampaigns() {
                 raised: campaign.donations.reduce((acc, donation) => acc + donation.amount, 0),
                 goal: campaign.goal,
                 amount: campaign.donations.length,
+                img: campaign.images[0],
               }}
             />
           </CarouselItem>

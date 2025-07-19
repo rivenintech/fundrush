@@ -1,4 +1,5 @@
 import { formatCurrency } from "@/lib/formatters";
+import { REMOTE_IMAGES_URL } from "@/lib/get-urls";
 import { HeartHandshake } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,8 +10,12 @@ type Campaign = {
   amount: number;
   raised: number;
   goal: number;
+  img: {
+    pathname: string;
+    alt: string;
+  };
 };
-export function Campaign({ data }: { data: Campaign }) {
+export async function Campaign({ data }: { data: Campaign }) {
   return (
     <Link href={`/campaigns/${data.id}`}>
       <article className="group rounded-lg bg-neutral-900/50 p-2">
@@ -21,7 +26,14 @@ export function Campaign({ data }: { data: Campaign }) {
               {data.amount} donation{data.amount === 1 ? "" : "s"}
             </span>
           </div>
-          <Image src="/images/2.jpg" width={5472} height={3648} alt="" className="duration-200 group-hover:scale-105" />
+          <div className="aspect-video">
+            <Image
+              src={`${REMOTE_IMAGES_URL}/${data.img.pathname}`}
+              alt={data.img.alt}
+              className="object-cover duration-200 group-hover:scale-105"
+              fill
+            />
+          </div>
         </div>
         <div className="space-y-3 p-4">
           <h3 className="font-semibold">{data.title}</h3>

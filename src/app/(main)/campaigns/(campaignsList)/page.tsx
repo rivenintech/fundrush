@@ -25,6 +25,14 @@ export default async function Page() {
                 amount: true,
               },
             },
+            images: {
+              columns: {
+                pathname: true,
+                alt: true,
+                // blurDataUrl: true,
+              },
+              limit: 1, // Fetch only the cover image
+            },
           },
           orderBy: (campaigns, { desc }) => desc(campaigns.createdAt),
           limit: 3,
@@ -51,6 +59,7 @@ export default async function Page() {
                   raised: campaign.donations.reduce((acc, donation) => acc + donation.amount, 0),
                   goal: campaign.goal,
                   amount: campaign.donations.length,
+                  img: campaign.images[0],
                 }}
               />
             ))}

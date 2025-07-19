@@ -28,6 +28,13 @@ async function fetchCampaignData(campaignId: string) {
           name: true,
         },
       },
+      images: {
+        columns: {
+          pathname: true,
+          alt: true,
+          // blurDataUrl: true,
+        },
+      },
     },
     where: (campaign, { eq }) => eq(campaign.id, Number(campaignId)),
   });
@@ -64,40 +71,7 @@ export default async function Page({ params }: Props) {
     <main className="container mx-auto flex max-w-6xl flex-col gap-10 px-6 md:mt-10 md:flex-row md:px-0">
       <section className="space-y-6 md:w-[60%]">
         <div>
-          <CampaignImages
-            images={[
-              {
-                src: "/images/1.jpg",
-                width: 5184,
-                height: 3456,
-                imageFit: "cover",
-              },
-              {
-                src: "/images/2.jpg",
-                width: 5472,
-                height: 3648,
-                imageFit: "cover",
-              },
-              {
-                src: "/images/3.jpg",
-                width: 5184,
-                height: 3456,
-                imageFit: "cover",
-              },
-              {
-                src: "/images/4.jpg",
-                width: 5472,
-                height: 3648,
-                imageFit: "cover",
-              },
-              {
-                src: "/images/5.jpg",
-                width: 5184,
-                height: 3456,
-                imageFit: "cover",
-              },
-            ]}
-          />
+          <CampaignImages images={campaignSingle.images} />
         </div>
         <DonatePanelMobile campaignId={campaignId} title={campaignSingle.title} />
         <div className="flex items-center gap-1.5 border-b border-neutral-800 pb-6">

@@ -17,6 +17,7 @@ export const campaign = pgTable("campaign", {
 });
 
 export const campaignRelations = relations(campaign, ({ one, many }) => ({
+  images: many(campaignImages),
   donations: many(donations),
   category: one(category, {
     fields: [campaign.categoryId],
@@ -25,6 +26,23 @@ export const campaignRelations = relations(campaign, ({ one, many }) => ({
   author: one(authors, {
     fields: [campaign.authorId],
     references: [authors.id],
+  }),
+}));
+
+export const campaignImages = pgTable("campaign_images", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  pathname: text().notNull(),
+  alt: text().notNull(),
+  // blurDataUrl: text().notNull(),
+  campaignId: integer()
+    .notNull()
+    .references(() => campaign.id),
+});
+
+export const campaignImagesRelations = relations(campaignImages, ({ one }) => ({
+  campaign: one(campaign, {
+    fields: [campaignImages.campaignId],
+    references: [campaign.id],
   }),
 }));
 
