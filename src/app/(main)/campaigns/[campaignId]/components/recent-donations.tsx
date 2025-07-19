@@ -67,7 +67,7 @@ function RecentDonationsSheet({
           <SheetDescription>Help the community by donating to this campaign.</SheetDescription>
         </SheetHeader>
 
-        <ul className="mx-4 space-y-4">
+        <ul className="space-y-4 overflow-y-auto px-4">
           {donations?.map((donation) => (
             <li className="flex items-center gap-3" key={donation.id}>
               <HandHeart size="36" className="rounded-full p-1.5 text-green-500" />
