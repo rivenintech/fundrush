@@ -1,9 +1,17 @@
 import { schema } from "@/lib/graphql/schema";
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
+import { ApolloArmor } from "@escape.tech/graphql-armor";
 import { NextRequest } from "next/server";
 
-const server = new ApolloServer({ schema });
+// https://escape.tech/graphql-armor
+const armor = new ApolloArmor();
+
+const server = new ApolloServer({
+  schema,
+  ...armor.protect(),
+  introspection: process.env.NODE_ENV !== "production",
+});
 
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   context: async (req) => ({ req }),

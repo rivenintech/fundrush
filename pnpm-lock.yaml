@@ -14,6 +14,9 @@ importers:
       '@as-integrations/next':
         specifier: ^3.2.0
         version: 3.2.0(@apollo/server@4.12.2(graphql@16.11.0))(next@15.3.3(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+      '@escape.tech/graphql-armor':
+        specifier: ^3.1.6
+        version: 3.1.6(@apollo/server@4.12.2(graphql@16.11.0))(@envelop/core@5.2.3)(@escape.tech/graphql-armor-types@0.7.0)
       '@neondatabase/serverless':
         specifier: ^1.0.1
         version: 1.0.1
@@ -652,6 +655,48 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@escape.tech/graphql-armor-block-field-suggestions@3.0.1':
+    resolution: {integrity: sha512-pZ+5aFgGW/pUul7nDOZ3PoeWAd9kLDspQ0R+fpz2aTjdIT0yI+f+ZbAGeTVmr5RypRDwjwokG/HjWoxTYTcRwQ==}
+    engines: {node: '>=18.0.0'}
+
+  '@escape.tech/graphql-armor-cost-limit@2.4.3':
+    resolution: {integrity: sha512-fLZTlJjrjinpNhbv5VP6f8Ce4MiQzbcHtCNaCPVaHqArTEbN7vDnlVLiH+VcmZBmOwU6Si97lKdlOXWNgB5ytw==}
+    engines: {node: '>=18.0.0'}
+
+  '@escape.tech/graphql-armor-max-aliases@2.6.2':
+    resolution: {integrity: sha512-SDk7pAzY6gutsdZ3NlyY55RrytrCPxJJxSN/DBfIGKphTrfBvKQWTnioQ9OlLP9kPjCE6XM5UWwGt7uqbpKSYA==}
+    engines: {node: '>=18.0.0'}
+
+  '@escape.tech/graphql-armor-max-depth@2.4.1':
+    resolution: {integrity: sha512-LTwNMSGEmRvpBxt25MmDpb9N/jyR66jEIDLaVJ3qDG2juyrdexhqxr98fLy4P26H7RKll9kyQ3AlhYaOjfy8cA==}
+    engines: {node: '>=18.0.0'}
+
+  '@escape.tech/graphql-armor-max-directives@2.3.1':
+    resolution: {integrity: sha512-YieT/NrTgZdLu3hzWfCgpmUKO1o/7Im9C4TI0e4O85Wa+zLit/DzHO4ZCIY//w8nkBf1KStkA1pD/v0daEfY5Q==}
+    engines: {node: '>=18.0.0'}
+
+  '@escape.tech/graphql-armor-max-tokens@2.5.1':
+    resolution: {integrity: sha512-XHui2npOz7Jn8shBZqfyeocWhdl0pUbKiaWmvbF+5rvNoRIGMgwMtaVhmf9ia8oGGbd+cx5EYo1v+oKHzIm79w==}
+    engines: {node: '>=18.0.0'}
+
+  '@escape.tech/graphql-armor-types@0.7.0':
+    resolution: {integrity: sha512-RHxyyp6PDgS6NAPnnmB6JdmUJ6oqhpSHFbsglGWeCcnNzceA5AkQFpir7VIDbVyS8LNC1xhipOtk7f9ycrIemQ==}
+
+  '@escape.tech/graphql-armor@3.1.6':
+    resolution: {integrity: sha512-w7U+ycK5KhVoN32yYV4dsz7Deb74PtFdEfxGkN7FZy7ZKQApSh3qiHW6KBijYtyshFogqpbTur6M27/8IAZ79w==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@apollo/server': ^4.0.0
+      '@envelop/core': ^5.0.0
+      '@escape.tech/graphql-armor-types': 0.7.0
+    peerDependenciesMeta:
+      '@apollo/server':
+        optional: true
+      '@envelop/core':
+        optional: true
+      '@escape.tech/graphql-armor-types':
+        optional: true
 
   '@eslint-community/eslint-utils@4.7.0':
     resolution: {integrity: sha512-dyybb3AcajC7uha6CvhdVRJqaKyn7w2YKqKyAN37NKYgZT36w+iRb0Dymmc5qEJ549c/S31cMMSFd75bteCpCw==}
@@ -4899,6 +4944,66 @@ snapshots:
 
   '@esbuild/win32-x64@0.25.5':
     optional: true
+
+  '@escape.tech/graphql-armor-block-field-suggestions@3.0.1':
+    dependencies:
+      graphql: 16.11.0
+    optionalDependencies:
+      '@envelop/core': 5.2.3
+
+  '@escape.tech/graphql-armor-cost-limit@2.4.3':
+    dependencies:
+      graphql: 16.11.0
+    optionalDependencies:
+      '@envelop/core': 5.2.3
+      '@escape.tech/graphql-armor-types': 0.7.0
+
+  '@escape.tech/graphql-armor-max-aliases@2.6.2':
+    dependencies:
+      graphql: 16.11.0
+    optionalDependencies:
+      '@envelop/core': 5.2.3
+      '@escape.tech/graphql-armor-types': 0.7.0
+
+  '@escape.tech/graphql-armor-max-depth@2.4.1':
+    dependencies:
+      graphql: 16.11.0
+    optionalDependencies:
+      '@envelop/core': 5.2.3
+      '@escape.tech/graphql-armor-types': 0.7.0
+
+  '@escape.tech/graphql-armor-max-directives@2.3.1':
+    dependencies:
+      graphql: 16.11.0
+    optionalDependencies:
+      '@envelop/core': 5.2.3
+      '@escape.tech/graphql-armor-types': 0.7.0
+
+  '@escape.tech/graphql-armor-max-tokens@2.5.1':
+    dependencies:
+      graphql: 16.11.0
+    optionalDependencies:
+      '@envelop/core': 5.2.3
+      '@escape.tech/graphql-armor-types': 0.7.0
+
+  '@escape.tech/graphql-armor-types@0.7.0':
+    dependencies:
+      graphql: 16.11.0
+    optional: true
+
+  '@escape.tech/graphql-armor@3.1.6(@apollo/server@4.12.2(graphql@16.11.0))(@envelop/core@5.2.3)(@escape.tech/graphql-armor-types@0.7.0)':
+    dependencies:
+      '@escape.tech/graphql-armor-block-field-suggestions': 3.0.1
+      '@escape.tech/graphql-armor-cost-limit': 2.4.3
+      '@escape.tech/graphql-armor-max-aliases': 2.6.2
+      '@escape.tech/graphql-armor-max-depth': 2.4.1
+      '@escape.tech/graphql-armor-max-directives': 2.3.1
+      '@escape.tech/graphql-armor-max-tokens': 2.5.1
+      graphql: 16.11.0
+    optionalDependencies:
+      '@apollo/server': 4.12.2(graphql@16.11.0)
+      '@envelop/core': 5.2.3
+      '@escape.tech/graphql-armor-types': 0.7.0
 
   '@eslint-community/eslint-utils@4.7.0(eslint@9.28.0(jiti@2.4.2))':
     dependencies:

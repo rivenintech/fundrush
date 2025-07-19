@@ -15,6 +15,7 @@
   "dependencies": {
     "@apollo/server": "^4.12.2",
     "@as-integrations/next": "^3.2.0",
+    "@escape.tech/graphql-armor": "^3.1.6",
     "@neondatabase/serverless": "^1.0.1",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-dialog": "^1.1.14",
