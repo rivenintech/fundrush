@@ -1,5 +1,6 @@
 import { formatCurrency } from "@/lib/formatters";
 import { HeartHandshake } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 type Campaign = {
@@ -20,7 +21,7 @@ export function Campaign({ data }: { data: Campaign }) {
               {data.amount} donation{data.amount === 1 ? "" : "s"}
             </span>
           </div>
-          <img src="/images/2.jpg" alt="" className="duration-200 group-hover:scale-105" />
+          <Image src="/images/2.jpg" width={5472} height={3648} alt="" className="duration-200 group-hover:scale-105" />
         </div>
         <div className="space-y-3 p-4">
           <h3 className="font-semibold">{data.title}</h3>

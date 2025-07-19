@@ -12,8 +12,8 @@ import { requestRecentDonations } from "../sharedQueries";
 export default function RecentDonations({ campaignId }: { campaignId: string }) {
   const increment = 5;
 
-  const { data, error, fetchNextPage, isFetching } = useInfiniteQuery({
-    queryKey: ["donations", campaignId],
+  const { data, fetchNextPage, isFetching } = useInfiniteQuery({
+    queryKey: ["donations", campaignId, increment],
     queryFn: ({ pageParam }) => requestRecentDonations(campaignId, increment, pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => lastPageParam + increment,
