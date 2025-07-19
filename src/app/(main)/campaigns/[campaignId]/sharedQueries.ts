@@ -48,6 +48,10 @@ export const requestRecentDonations = async (id: string, limit: number, offset: 
         direction: "desc",
         priority: 1,
       },
+      id: {
+        direction: "desc",
+        priority: 2,
+      },
     },
   });
 };
