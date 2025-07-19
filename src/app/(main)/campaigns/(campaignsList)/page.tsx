@@ -57,7 +57,7 @@ export default async function Page() {
           </div>
           <Link
             href={`/campaigns/category/${category.id}`}
-            className="flex items-center justify-end gap-1 text-neutral-400"
+            className="mb-2 flex items-center justify-end gap-1 text-neutral-400"
           >
             <span>Show more</span>
             <ArrowRight size="20" className="self-baseline-last" />

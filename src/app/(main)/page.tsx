@@ -36,10 +36,6 @@ const faq = [
     answer: "We accept major credit and debit cards, as well as PayPal and other popular online payment methods.",
   },
   {
-    question: "Can I share a campaign on social media?",
-    answer: "Absolutely! Every campaign page includes easy sharing options for popular social media platforms.",
-  },
-  {
     question: "How can I track the progress of a campaign?",
     answer: "Campaign pages display live updates and fundraising progress to keep you informed.",
   },
@@ -207,6 +203,17 @@ export default async function Home() {
           </p>
         </div>
         <Accordion type="single" collapsible>
+          <AccordionItem value="faq-disclaimer" key="faq-disclaimer">
+            <AccordionTrigger className="text-base">Is this website legit?</AccordionTrigger>
+            <AccordionContent className="text-neutral-400">
+              No, this is a demo website and not an actual fundraising platform. It is one of several projects I have
+              built. You can explore more projects like this at{" "}
+              <a href="https://rivenintech.com" target="_blank" className="underline">
+                rivenintech.com
+              </a>
+              .
+            </AccordionContent>
+          </AccordionItem>
           {faq.map((faq, index) => (
             <AccordionItem value={`faq-${index}`} key={`faq-${index}`}>
               <AccordionTrigger className="text-base">{faq.question}</AccordionTrigger>
