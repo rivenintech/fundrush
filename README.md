@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<a id="readme-top"></a>
 
-## Getting Started
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/rivenintech/resta">
+    <img src="./public/icon.svg" alt="Logo" width="80" height="80">
+  </a>
 
-First, run the development server:
+<h3 align="center">FundRush - fundraising platform</h3>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  <p align="center">
+    A fundraising platform built with Next.js.
+    <br />
+    <a href="https://fundrush.rivenintech.com"><strong>View Live Site »</strong></a>
+  </p>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#️-early-development-notice">⚠️ Early Development Notice</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- ABOUT THE PROJECT -->
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## About The Project
 
-## Learn More
+### Built With
 
-To learn more about Next.js, take a look at the following resources:
+- [![Next.js][nextjs]][nextjs-url]
+- [![TypeScript][typescript]][typescript-url]
+- [![TailwindCSS][tailwindcss]][tailwindcss-url]
+- [![React.js][react]][react-url]
+- [![React Query][react-query]][react-query-url]
+- [![GraphQL][graphql]][graphql-url]
+- [![Drizzle][drizzle]][drizzle-url]
+- [![shadcn/ui][shadcn/ui]][shadcn/ui-url]
+- [![Vercel][vercel]][vercel-url]
+- [![Zod][zod]][zod-url]
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚠️ Early Development Notice
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is still in active development phase. Main features that are yet to be implemented:
 
-## Deploy on Vercel
+- [ ] Optimize pages for performance
+- [ ] Create admin dashboard for managing campaigns, viewing donations and stats + auth
+- [ ] Improve campaign page:
+  - [ ] Donate button - connect to Stripe for payment flow (demo mode)
+  - [ ] About section - use rich text editor/markdown for campaign description
+  - [ ] Display new donations notifcations (polling)
+- [ ] Write unit and E2E tests
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Gallery
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Homepage - desktop |
+| --- |
+| ![Desktop page screenshot][desktop-screenshot] |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+[rivenintech.com][my-website-url] - All of my socials, contact information and other projects can be found on my website.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+<!-- https://github.com/Ileriayo/markdown-badges -->
+
+[desktop-screenshot]: /public/homepage-desktop.png
+[my-website-url]: https://rivenintech.com/
+[nextjs]: https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white
+[nextjs-url]: https://nextjs.org/
+[typescript]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
+[tailwindcss]: https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white
+[tailwindcss-url]: https://tailwindcss.com
+[react]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[react-url]: https://reactjs.org/
+[react-query]: https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white
+[react-query-url]: https://tanstack.com/query
+[graphql]: https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white
+[graphql-url]: https://graphql.org/
+[drizzle]: https://img.shields.io/badge/Drizzle_ORM-000000?style=for-the-badge&logo=drizzle&logoColor=C5F74F
+[drizzle-url]: https://orm.drizzle.team/
+[vercel]: https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white
+[vercel-url]: https://vercel.com/
+[zod]: https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white
+[zod-url]: https://zod.dev/
+[shadcn/ui]: https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcn/ui&logoColor=white
+[shadcn/ui-url]: https://ui.shadcn.com/
