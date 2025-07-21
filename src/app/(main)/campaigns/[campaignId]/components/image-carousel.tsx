@@ -12,7 +12,7 @@ import "yet-another-react-lightbox/styles.css";
 type Image = {
   pathname: string;
   alt: string;
-  // blurDataUrl: string | null;
+  blurDataUrl: string;
 };
 
 export default function CampaignImages({ images }: { images: Image[] }) {
@@ -63,8 +63,8 @@ function NextJsImage({ slide }: { slide: Image; rect: ContainerRect }) {
       alt={slide.alt || ""}
       src={`${REMOTE_IMAGES_URL}/${slide.pathname}`}
       draggable={false}
-      // placeholder={slide.blurDataURL ? "blur" : undefined}
-      // blurDataURL={slide.blurDataURL || undefined}
+      placeholder="blur"
+      blurDataURL={slide.blurDataUrl}
       style={{
         objectFit: "cover",
         cursor: click ? "pointer" : undefined,

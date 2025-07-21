@@ -29,7 +29,7 @@ export default async function Page() {
               columns: {
                 pathname: true,
                 alt: true,
-                // blurDataUrl: true,
+                blurDataUrl: true,
               },
               limit: 1, // Fetch only the cover image
             },

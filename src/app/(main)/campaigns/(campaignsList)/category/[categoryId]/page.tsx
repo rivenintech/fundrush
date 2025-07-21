@@ -22,7 +22,7 @@ async function fetchCategoryData(categoryId: string) {
             columns: {
               pathname: true,
               alt: true,
-              // blurDataUrl: true,
+              blurDataUrl: true,
             },
             limit: 1, // Fetch only the cover image
           },

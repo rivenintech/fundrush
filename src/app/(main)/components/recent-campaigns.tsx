@@ -25,7 +25,7 @@ export default async function RecentCampaigns() {
         columns: {
           pathname: true,
           alt: true,
-          // blurDataUrl: true,
+          blurDataUrl: true,
         },
         limit: 1, // Fetch only the cover image
       },

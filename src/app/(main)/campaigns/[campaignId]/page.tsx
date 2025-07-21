@@ -32,7 +32,7 @@ async function fetchCampaignData(campaignId: string) {
         columns: {
           pathname: true,
           alt: true,
-          // blurDataUrl: true,
+          blurDataUrl: true,
         },
       },
     },

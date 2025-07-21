@@ -33,7 +33,7 @@ export const campaignImages = pgTable("campaign_images", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   pathname: text().notNull(),
   alt: text().notNull(),
-  // blurDataUrl: text().notNull(),
+  blurDataUrl: text().notNull(),
   campaignId: integer()
     .notNull()
     .references(() => campaign.id),

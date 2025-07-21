@@ -13,6 +13,7 @@ type Campaign = {
   img: {
     pathname: string;
     alt: string;
+    blurDataUrl: string;
   };
 };
 export async function Campaign({ data }: { data: Campaign }) {
@@ -32,6 +33,8 @@ export async function Campaign({ data }: { data: Campaign }) {
               alt={data.img.alt}
               className="object-cover duration-200 group-hover:scale-105"
               fill
+              placeholder="blur"
+              blurDataURL={data.img.blurDataUrl}
             />
           </div>
         </div>
