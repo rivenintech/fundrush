@@ -2,6 +2,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { Check, Link } from "lucide-react";
 import { requestDonationProgress } from "../sharedQueries";
 import DonationsProgress from "./donation-progress";
+import { MobileShareDrawer } from "./mobile-share-drawer";
 
 export async function DonatePanelDesktop({ campaignId, title }: { campaignId: string; title: string }) {
   const queryClient = new QueryClient();
@@ -67,10 +68,7 @@ export async function DonatePanelMobile({ campaignId, title }: { campaignId: str
         <button className="w-full rounded-lg border-2 border-transparent bg-green-500 px-8 py-3 text-center font-bold text-black">
           Donate Now
         </button>
-        {/* TODO: Add drawer for sharing options */}
-        <button className="w-full rounded-lg border-2 border-transparent bg-green-950/40 px-8 py-3 text-center font-bold text-green-500">
-          Share
-        </button>
+        <MobileShareDrawer title={title} />
       </div>
     </div>
   );
