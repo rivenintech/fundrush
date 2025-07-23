@@ -3,6 +3,7 @@ import { REMOTE_IMAGES_URL } from "@/lib/get-urls";
 import { HeartHandshake } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import type { JSX } from "react";
 
 type Campaign = {
   id: number;
@@ -16,7 +17,9 @@ type Campaign = {
     blurDataUrl: string;
   };
 };
-export async function Campaign({ data }: { data: Campaign }) {
+export async function Campaign({ data, headingLevel = 2 }: { data: Campaign; headingLevel?: number }) {
+  const HeadingTag = `h${headingLevel}` as keyof JSX.IntrinsicElements;
+
   return (
     <Link href={`/campaigns/${data.id}`}>
       <article className="group rounded-lg bg-neutral-900/50 p-2">
@@ -39,7 +42,7 @@ export async function Campaign({ data }: { data: Campaign }) {
           </div>
         </div>
         <div className="space-y-3 p-4">
-          <h3 className="font-semibold">{data.title}</h3>
+          <HeadingTag className="font-semibold">{data.title}</HeadingTag>
           <div className="flex-start flex h-2 w-full overflow-hidden rounded-lg bg-neutral-800 text-xs font-medium">
             <div
               className="flex h-full items-center justify-center overflow-hidden rounded-lg bg-green-500 text-white transition-all"

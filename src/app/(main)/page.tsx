@@ -151,7 +151,7 @@ export default async function Home() {
       <section className="container mx-auto max-w-6xl px-6">
         <div className="space-y-3">
           <div className="text-center">
-            <h3 className="text-3xl font-bold tracking-wider md:text-4xl">Recent Campaigns</h3>
+            <h2 className="text-3xl font-bold tracking-wider md:text-4xl">Recent Campaigns</h2>
             <p className="text-neutral-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           </div>
           <RecentCampaigns />
@@ -160,9 +160,9 @@ export default async function Home() {
       <section className="relative flex h-[40rem] items-center justify-center overflow-hidden">
         <Spotlight gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 92%, 0.15) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%)" />
         <div className="space-y-3 px-6 text-center">
-          <h3 className="text-xl font-semibold text-neutral-300 md:text-2xl">
+          <h2 className="text-xl font-semibold text-neutral-300 md:text-2xl">
             Join our community of donors and help us build a better future.
-          </h3>
+          </h2>
           <p className="bg-opacity-50 bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-5xl font-bold text-transparent md:text-7xl">
             $1,500,000+
           </p>
@@ -192,9 +192,9 @@ export default async function Home() {
       </section>
       <section className="container mx-auto max-w-6xl px-6">
         <div className="space-y-3 text-center">
-          <h3 className="text-3xl font-bold tracking-wider md:text-4xl" id="faq">
+          <h2 className="text-3xl font-bold tracking-wider md:text-4xl" id="faq">
             Frequently Asked Questions
-          </h3>
+          </h2>
           <p className="text-neutral-400">
             Have another question? Contact us at{" "}
             <a href="mailto:#" className="underline">

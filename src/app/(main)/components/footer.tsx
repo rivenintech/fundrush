@@ -7,13 +7,13 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <a className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <Image src="/icon.svg" alt="FundRush Logo" width={40} height={40} />
               <div>
                 <h3 className="text-xl font-bold tracking-wider">FundRush</h3>
                 <p className="text-sm text-neutral-400">Fund a cause you care about.</p>
               </div>
-            </a>
+            </Link>
           </div>
           <ul className="hidden gap-10 md:flex">
             <li>

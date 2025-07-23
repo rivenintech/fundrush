@@ -75,6 +75,7 @@ export default async function Page({ params }: Props) {
               amount: campaign.donations.length,
               img: campaign.images[0],
             }}
+            headingLevel={3}
           />
         ))}
       </div>
