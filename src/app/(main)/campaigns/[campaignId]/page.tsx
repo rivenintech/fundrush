@@ -4,7 +4,7 @@ import { db } from "@/db/client";
 import { User2 } from "lucide-react";
 import { Metadata } from "next";
 import CampaignTabs from "./components/campaign-info-tabs";
-import { DonatePanelDesktop, DonatePanelMobile } from "./components/donate-panel";
+import { DonatePanel } from "./components/donate-panel";
 import CampaignImages from "./components/image-carousel";
 import RecentDonations from "./components/recent-donations";
 
@@ -73,7 +73,9 @@ export default async function Page({ params }: Props) {
         <div>
           <CampaignImages images={campaignSingle.images} />
         </div>
-        <DonatePanelMobile campaignId={campaignId} title={campaignSingle.title} />
+        <div className="md:hidden">
+          <DonatePanel campaignId={campaignId} title={campaignSingle.title} />
+        </div>
         <div className="flex items-center gap-1.5 border-b border-neutral-800 pb-6">
           <User2 size="28" className="rounded-full bg-neutral-800 p-1.5" />
           <p className="text-neutral-400">
@@ -83,7 +85,9 @@ export default async function Page({ params }: Props) {
         <CampaignTabs faq={campaignSingle.faq} about={campaignSingle.about} />
       </section>
       <aside className="top-28 h-full space-y-12 text-white md:sticky md:w-[40%]">
-        <DonatePanelDesktop campaignId={campaignId} title={campaignSingle.title} />
+        <div className="hidden md:block">
+          <DonatePanel campaignId={campaignId} title={campaignSingle.title} />
+        </div>
         <div className="rounded-lg bg-neutral-900 p-6">
           <HydrationBoundary state={dehydrate(queryClient)}>
             <RecentDonations campaignId={campaignId} />
