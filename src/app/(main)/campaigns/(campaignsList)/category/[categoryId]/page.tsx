@@ -1,5 +1,5 @@
 import { Campaign } from "@/app/(main)/campaigns/campaign";
-import { db } from "@/db/client";
+import { db } from "@/lib/db/client";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

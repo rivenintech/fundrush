@@ -1,4 +1,4 @@
-import { db } from "@/db/client";
+import { db } from "@/lib/db/client";
 import { buildSchema } from "drizzle-graphql";
 import { GraphQLObjectType, GraphQLSchema } from "graphql";
 

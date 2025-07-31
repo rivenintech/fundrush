@@ -1,5 +1,5 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { db } from "@/db/client";
+import { db } from "@/lib/db/client";
 import { connection } from "next/server";
 import { Campaign } from "../campaigns/campaign";
 

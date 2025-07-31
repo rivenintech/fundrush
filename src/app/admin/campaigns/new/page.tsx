@@ -1,5 +1,5 @@
-import { db } from "@/db/client";
-import { campaign, campaignImages } from "@/db/schema";
+import { db } from "@/lib/db/client";
+import { campaign, campaignImages } from "@/lib/db/schema";
 import { put } from "@vercel/blob";
 import { redirect } from "next/navigation";
 import { getPlaiceholder } from "plaiceholder";

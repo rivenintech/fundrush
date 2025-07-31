@@ -1,5 +1,5 @@
 import { NewCampaignForm } from "@/app/admin/campaigns/add-edit-form";
-import { db } from "@/db/client";
+import { db } from "@/lib/db/client";
 
 type Props = {
   params: Promise<{ campaignId: string }>;

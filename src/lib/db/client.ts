@@ -1,4 +1,4 @@
-import * as dbSchema from "@/db/schema";
+import * as dbSchema from "@/lib/db/schema";
 import { neon } from "@neondatabase/serverless";
 import { config } from "dotenv";
 import { drizzle } from "drizzle-orm/neon-http";

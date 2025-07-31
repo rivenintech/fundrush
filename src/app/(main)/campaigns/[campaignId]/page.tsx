@@ -1,6 +1,6 @@
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
-import { db } from "@/db/client";
+import { db } from "@/lib/db/client";
 import { User2 } from "lucide-react";
 import { Metadata } from "next";
 import CampaignTabs from "./components/campaign-info-tabs";

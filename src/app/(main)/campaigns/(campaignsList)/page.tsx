@@ -1,4 +1,4 @@
-import { db } from "@/db/client";
+import { db } from "@/lib/db/client";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { connection } from "next/server";
