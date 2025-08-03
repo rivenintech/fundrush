@@ -18,12 +18,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
+const nav = {
   navSecondary: [
     {
       title: "Support",
@@ -68,11 +63,11 @@ export function AppSidebar({ children, ...props }: React.ComponentProps<typeof S
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavCampaigns nav={data.navCampaigns} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavCampaigns nav={nav.navCampaigns} />
+        <NavSecondary items={nav.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );
