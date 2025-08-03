@@ -25,20 +25,20 @@ const secondaryVariant = {
   },
 };
 
-export const FileUpload = ({ onChange }: { onChange?: (files: File[]) => void }) => {
+export const FileUpload = ({ onChange }: { onChange: (files: File[]) => void }) => {
   const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const addFiles = (newFiles: File[]) => {
     const updatedFiles = [...files, ...newFiles];
     setFiles(updatedFiles);
-    onChange && onChange(updatedFiles);
+    onChange(updatedFiles);
   };
 
   const removeFile = (index: number) => {
     const updatedFiles = files.filter((_, idx) => idx !== index);
     setFiles(updatedFiles);
-    onChange && onChange(updatedFiles);
+    onChange(updatedFiles);
   };
 
   const handleClick = () => {

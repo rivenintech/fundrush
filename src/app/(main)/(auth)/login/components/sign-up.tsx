@@ -13,14 +13,18 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
 
   const handleSignUp = async () => {
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match.");
-      return;
-    }
+    setLoading(true);
+    toast.error("To prevent abuse, sign up is disabled for now. Please use the demo login credentials.");
+    return;
+
+    // if (password !== confirmPassword) {
+    //   toast.error("Passwords do not match.");
+    //   return;
+    // }
 
     await authClient.signUp.email(
       {
@@ -52,8 +56,7 @@ export default function SignUp() {
       className="flex flex-col gap-5"
       onSubmit={(e) => {
         e.preventDefault();
-        // handleSignUp();
-        toast.error("To prevent abuse, sign up is disabled for now. Please use the demo login credentials.");
+        handleSignUp();
       }}
     >
       <div className="grid w-full items-center gap-2">

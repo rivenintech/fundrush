@@ -44,11 +44,12 @@ export function NewCampaignForm({ defaultValues, categories, submitFormAction }:
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setPending(true);
-    // const res = await submitFormAction(values);
     toast.warning("Creating new campaigns and editing existing ones is currently disabled to prevent abuse.");
     router.push("/admin/campaigns");
+    return;
+    const res = await submitFormAction(values);
     setPending(false);
-    // console.error(res?.errors);
+    console.error(res?.errors);
 
     // TODO: Add error handling and redirect on success
   }
@@ -180,7 +181,7 @@ export function NewCampaignForm({ defaultValues, categories, submitFormAction }:
         <FormField
           control={form.control}
           name="images"
-          render={({ field: { value, onChange, ...fieldProps } }) => (
+          render={({ field: { onChange } }) => (
             <FormItem>
               {/* <FormLabel>Images</FormLabel> */}
               <FormControl>

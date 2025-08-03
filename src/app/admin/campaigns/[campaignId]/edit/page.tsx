@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth/auth";
 import { db } from "@/lib/db/client";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import z from "zod";
 import { formSchema } from "../../new/form-schema";
 
 type Props = {
@@ -48,7 +49,7 @@ export default async function EditCampaign({ params }: Props) {
     category: campaign?.categoryId || "",
   };
 
-  async function processFormSubmission(submittedData: any) {
+  async function processFormSubmission(submittedData: z.infer<typeof formSchema>) {
     "use server";
     const validatedFormData = formSchema.safeParse(submittedData);
 

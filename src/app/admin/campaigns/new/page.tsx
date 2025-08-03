@@ -26,7 +26,7 @@ export default async function Page() {
     },
   });
 
-  async function processFormSubmission(submittedData: any) {
+  async function processFormSubmission(submittedData: z.infer<typeof formSchema>) {
     "use server";
     const validatedFormData = formSchema.safeParse(submittedData);
 
@@ -39,9 +39,10 @@ export default async function Page() {
     const formData = validatedFormData.data;
     console.log("Form Data:", formData);
     // const campaignId = await insertCampaignData(formData);
-    // await insertCampaignData(formData);
-
     redirect("/admin/campaigns");
+    return;
+    await insertCampaignData(formData);
+
     // redirect(`/admin/campaigns/${campaignId}`);
   }
 
