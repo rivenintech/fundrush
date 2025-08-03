@@ -1,6 +1,8 @@
+import { auth } from "@/lib/auth/auth";
 import { db } from "@/lib/db/client";
 import { campaign, campaignImages } from "@/lib/db/schema";
 import { put } from "@vercel/blob";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getPlaiceholder } from "plaiceholder";
 import z from "zod";
@@ -8,6 +10,14 @@ import { NewCampaignForm } from "../add-edit-form";
 import { formSchema } from "./form-schema";
 
 export default async function Page() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect("/login");
+  }
+
   const categories = await db.query.category.findMany({
     columns: {
       id: true,
@@ -29,7 +39,7 @@ export default async function Page() {
     const formData = validatedFormData.data;
     console.log("Form Data:", formData);
     // const campaignId = await insertCampaignData(formData);
-    await insertCampaignData(formData);
+    // await insertCampaignData(formData);
 
     redirect("/admin/campaigns");
     // redirect(`/admin/campaigns/${campaignId}`);

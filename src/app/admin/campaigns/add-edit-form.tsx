@@ -13,7 +13,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { formatCurrency } from "@/lib/formatters";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 import { formSchema } from "./new/form-schema";
 
 type NewCampaignFormProps = {
@@ -25,6 +27,7 @@ type NewCampaignFormProps = {
 };
 
 export function NewCampaignForm({ defaultValues, categories, submitFormAction }: NewCampaignFormProps) {
+  const router = useRouter();
   const [pending, setPending] = useState(false);
 
   const form = useForm({
@@ -41,8 +44,11 @@ export function NewCampaignForm({ defaultValues, categories, submitFormAction }:
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setPending(true);
-    const res = await submitFormAction(values);
-    console.error(res?.errors);
+    // const res = await submitFormAction(values);
+    toast.warning("Creating new campaigns and editing existing ones is currently disabled to prevent abuse.");
+    router.push("/admin/campaigns");
+    setPending(false);
+    // console.error(res?.errors);
 
     // TODO: Add error handling and redirect on success
   }

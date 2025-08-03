@@ -1,7 +1,18 @@
+import { auth } from "@/lib/auth/auth";
 import { db } from "@/lib/db/client";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { Campaign } from "./campaign";
 
 export default async function CampaignsList() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect("/login");
+  }
+
   const campaigns = await db.query.campaign.findMany({
     where: (campaign, { eq }) => eq(campaign.authorId, 1),
     columns: {
