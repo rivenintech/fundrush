@@ -46,6 +46,7 @@
 - [![GraphQL][graphql]][graphql-url]
 - [![Drizzle][drizzle]][drizzle-url]
 - [![shadcn/ui][shadcn/ui]][shadcn/ui-url]
+- [![Better-Auth][better-auth]][better-auth-url]
 - [![Vercel][vercel]][vercel-url]
 - [![Zod][zod]][zod-url]
 
@@ -53,8 +54,12 @@
 
 This project is still in active development phase. Main features that are yet to be implemented:
 
+- [ ] Finalize the admin dashboard for campaign management:
+  - [x] Basic dashboard and authentication implemented
+  - [x] Add campaign creation and editing features
+  - [ ] Improve dashboard UI and usability
+  - [ ] Add analytics
 - [ ] Optimize pages for performance
-- [ ] Create admin dashboard for managing campaigns, viewing donations and stats + auth
 - [ ] Improve campaign page:
   - [ ] Donate button - connect to Stripe for payment flow (demo mode)
   - [ ] About section - use rich text editor/markdown for campaign description
@@ -103,3 +108,5 @@ This project is still in active development phase. Main features that are yet to
 [zod-url]: https://zod.dev/
 [shadcn/ui]: https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcn/ui&logoColor=white
 [shadcn/ui-url]: https://ui.shadcn.com/
+[better-auth]: https://img.shields.io/badge/better--auth-000000?style=for-the-badge&logo=betterauth&logoColor=white
+[better-auth-url]: https://www.better-auth.com/
