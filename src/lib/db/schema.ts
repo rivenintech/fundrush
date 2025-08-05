@@ -1,5 +1,6 @@
 import { relations, sql } from "drizzle-orm";
 import { check, integer, numeric, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { user } from "../auth/auth-schema";
 
 export const campaign = pgTable("campaign", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -11,9 +12,9 @@ export const campaign = pgTable("campaign", {
   categoryId: varchar()
     .notNull()
     .references(() => category.id),
-  authorId: integer()
+  authorId: text()
     .notNull()
-    .references(() => authors.id),
+    .references(() => user.id),
 });
 
 export const campaignRelations = relations(campaign, ({ one, many }) => ({
@@ -23,10 +24,10 @@ export const campaignRelations = relations(campaign, ({ one, many }) => ({
     fields: [campaign.categoryId],
     references: [category.id],
   }),
-  author: one(authors, {
-    fields: [campaign.authorId],
-    references: [authors.id],
-  }),
+  // author: one(user, {
+  //   fields: [campaign.authorId],
+  //   references: [user.id],
+  // }),
 }));
 
 export const campaignImages = pgTable("campaign_images", {
@@ -45,13 +46,6 @@ export const campaignImagesRelations = relations(campaignImages, ({ one }) => ({
     references: [campaign.id],
   }),
 }));
-
-export const authors = pgTable("authors", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: text().notNull(),
-});
-
-export const authorsRelations = relations(authors, ({ many }) => ({ campaigns: many(campaign) }));
 
 export const category = pgTable(
   "category",

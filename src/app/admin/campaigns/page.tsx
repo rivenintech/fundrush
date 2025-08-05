@@ -14,7 +14,7 @@ export default async function CampaignsList() {
   }
 
   const campaigns = await db.query.campaign.findMany({
-    where: (campaign, { eq }) => eq(campaign.authorId, 1),
+    where: (campaign, { eq }) => eq(campaign.authorId, session.user.id),
     columns: {
       id: true,
       title: true,

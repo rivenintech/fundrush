@@ -41,7 +41,12 @@ export default async function Page() {
     // const campaignId = await insertCampaignData(formData);
     redirect("/admin/campaigns");
     return;
-    await insertCampaignData(formData);
+
+    if (!session) {
+      return redirect("/login");
+    }
+
+    await insertCampaignData(formData, session.user.id);
 
     // redirect(`/admin/campaigns/${campaignId}`);
   }
@@ -53,7 +58,7 @@ export default async function Page() {
   );
 }
 
-async function insertCampaignData(formData: z.infer<typeof formSchema>) {
+async function insertCampaignData(formData: z.infer<typeof formSchema>, userId: string) {
   "use server";
 
   // Upload images to Vercel Blob
@@ -89,7 +94,7 @@ async function insertCampaignData(formData: z.infer<typeof formSchema>) {
       goal: formData.goal,
       about: formData.about,
       faq: formData.faq,
-      authorId: 1, // TODO: Replace with actual author ID logic
+      authorId: userId,
       categoryId: "animals", // TODO: Replace with actual category ID logic
     })
     .returning({ campaignId: campaign.id });
