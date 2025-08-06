@@ -24,10 +24,10 @@ export const campaignRelations = relations(campaign, ({ one, many }) => ({
     fields: [campaign.categoryId],
     references: [category.id],
   }),
-  // author: one(user, {
-  //   fields: [campaign.authorId],
-  //   references: [user.id],
-  // }),
+  author: one(user, {
+    fields: [campaign.authorId],
+    references: [user.id],
+  }),
 }));
 
 export const campaignImages = pgTable("campaign_images", {
