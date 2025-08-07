@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { BASE_URL } from "@/lib/get-urls";
+import { getURL } from "@/lib/get-urls";
 import { Check, Copy } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -71,7 +71,7 @@ export default function ShareBtn({ title }: { title: string }) {
 
 function Content({ title }: { title: string }) {
   const pathname = usePathname();
-  const shareUrl = `${BASE_URL}${pathname}`;
+  const shareUrl = getURL("base", pathname);
   const [copied, setCopied] = useState(false);
 
   function handleCopy() {

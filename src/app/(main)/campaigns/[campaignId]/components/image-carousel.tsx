@@ -1,6 +1,6 @@
 "use client";
 
-import { REMOTE_IMAGES_URL } from "@/lib/get-urls";
+import { getURL } from "@/lib/get-urls";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import Lightbox, { ContainerRect, ThumbnailsRef, useLightboxProps } from "yet-another-react-lightbox";
@@ -61,7 +61,7 @@ function NextJsImage({ slide }: { slide: Image; rect: ContainerRect }) {
     <Image
       fill
       alt={slide.alt || ""}
-      src={`${REMOTE_IMAGES_URL}/${slide.pathname}`}
+      src={getURL("image", slide.pathname)}
       draggable={false}
       placeholder="blur"
       blurDataURL={slide.blurDataUrl}

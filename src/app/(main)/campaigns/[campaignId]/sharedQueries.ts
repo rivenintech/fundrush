@@ -1,5 +1,5 @@
 import { graphql } from "@/__generated__/graphql";
-import { GRAPHQL_URL } from "@/lib/get-urls";
+import { getURL } from "@/lib/get-urls";
 import request from "graphql-request";
 
 export const requestDonationProgress = async (id: string) => {
@@ -14,7 +14,7 @@ export const requestDonationProgress = async (id: string) => {
     }
   `);
 
-  return request(GRAPHQL_URL, query, {
+  return request(getURL("graphql"), query, {
     where: {
       id: {
         eq: Number(id),
@@ -35,7 +35,7 @@ export const requestRecentDonations = async (id: string, limit: number, offset: 
     }
   `);
 
-  return request(GRAPHQL_URL, query, {
+  return request(getURL("graphql"), query, {
     where: {
       campaignId: {
         eq: Number(id),

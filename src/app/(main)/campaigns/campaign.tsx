@@ -1,5 +1,5 @@
 import { formatCurrency } from "@/lib/formatters";
-import { REMOTE_IMAGES_URL } from "@/lib/get-urls";
+import { getURL } from "@/lib/get-urls";
 import { HeartHandshake } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +32,7 @@ export async function Campaign({ data, headingLevel = 2 }: { data: Campaign; hea
           </div>
           <div className="aspect-video">
             <Image
-              src={`${REMOTE_IMAGES_URL}/${data.img.pathname}`}
+              src={getURL("image", data.img.pathname)}
               alt={data.img.alt}
               className="object-cover duration-200 group-hover:scale-105"
               fill
