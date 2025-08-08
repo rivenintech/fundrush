@@ -1,11 +1,15 @@
 const LOCALE = "en-US";
 
-export function formatCurrency(amount: number) {
+export function formatCurrency(amount: number | string) {
   const formatter = new Intl.NumberFormat(LOCALE, {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 2,
   });
+
+  if (typeof amount === "string") {
+    amount = parseFloat(amount);
+  }
 
   // Remove .00 if present at the end
   if (amount % 1 === 0) {
