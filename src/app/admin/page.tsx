@@ -91,27 +91,24 @@ export default async function AdminPage() {
 
     const statColumn =
       type === "avgDonation"
-        ? avg(donations.amount).mapWith(Number).as("data")
+        ? avg(donations.amount).mapWith(Number)
         : type === "totalAmount"
-          ? sum(donations.amount).mapWith(Number).as("data")
-          : count(donations.id).as("data");
+          ? sum(donations.amount).mapWith(Number)
+          : count(donations.id);
 
+    // Generate a series of dates for the selected range and left join with donations
     return await db
       .select({
-        date: sql`date_trunc('day', ${donations.donatedAt})`.mapWith(String).as("date"),
-        stat: statColumn,
+        date: sql`date_series.day`.mapWith(String).as("date"),
+        stat: sql`COALESCE(${statColumn}, 0)`.as("stat"),
       })
-      .from(campaign)
-      .innerJoin(donations, eq(campaign.id, donations.campaignId))
-      .where(
-        and(
-          eq(campaign.authorId, session.user.id),
-          gte(donations.donatedAt, startDate),
-          lte(donations.donatedAt, endDate),
-        ),
+      .from(
+        sql`generate_series(${startDate.toISOString()}::date, ${endDate.toISOString()}::date, interval '1 day') AS date_series(day)`,
       )
-      .groupBy(sql`date_trunc('day', ${donations.donatedAt})`)
-      .orderBy(sql`date`);
+      .leftJoin(donations, sql`date_trunc('day', ${donations.donatedAt}) = date_series.day`)
+      .leftJoin(campaign, sql`${campaign.id} = ${donations.campaignId} AND ${campaign.authorId} = ${session.user.id}`)
+      .groupBy(sql`date_series.day`)
+      .orderBy(sql`date_series.day`);
   }
 
   const amountChange = getPercentChange(Number(current.totalAmount), Number(previous.totalAmount));
