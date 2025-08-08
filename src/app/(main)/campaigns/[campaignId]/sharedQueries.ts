@@ -46,11 +46,11 @@ export const requestRecentDonations = async (id: string, limit: number, offset: 
     orderBy: {
       donatedAt: {
         direction: "desc",
-        priority: 1,
+        priority: 2,
       },
       id: {
         direction: "desc",
-        priority: 2,
+        priority: 1,
       },
     },
   });
