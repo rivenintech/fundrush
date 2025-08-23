@@ -62,7 +62,7 @@ This project is still in active development phase. Main features that are yet to
 - [ ] Optimize pages for performance
 - [ ] Improve campaign page:
   - [ ] Donate button - connect to Stripe for payment flow (demo mode)
-  - [ ] About section - use rich text editor/markdown for campaign description
+  - [x] About section - use rich text editor/markdown for campaign description
   - [ ] Display new donations notifcations (polling)
 - [ ] Write unit and E2E tests
 

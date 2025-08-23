@@ -1,11 +1,11 @@
 import { relations, sql } from "drizzle-orm";
-import { check, integer, numeric, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { check, integer, json, numeric, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { user } from "../auth/auth-schema";
 
 export const campaign = pgTable("campaign", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   title: text().notNull(),
-  about: text().notNull(),
+  about: json().notNull(),
   faq: text().$type<{ question: string; answer: string }[] | null>().default(null),
   goal: numeric({ precision: 10, scale: 2, mode: "number" }).notNull(),
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),

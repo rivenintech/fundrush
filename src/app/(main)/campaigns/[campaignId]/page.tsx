@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: campaignSingle?.title,
-    description: campaignSingle?.about.substring(0, 150),
+    description: `Donate to help ${campaignSingle?.author?.name} reach ${campaignSingle?.goal}. Your support makes a real difference.`,
   };
 }
 

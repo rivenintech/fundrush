@@ -1,10 +1,11 @@
 "use client";
 
+import { RichTextReader } from "@/components/slate-text-editor/rich-text-editor";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type ParsedFaq = { question: string; answer: string }[];
-type Props = { about: string; faq: "Faq" | null };
+type Props = { about: unknown; faq: "Faq" | null };
 
 export default function CampaignTabs({ about, faq }: Props) {
   const parsedFaq: ParsedFaq = JSON.parse(faq || "[]");
@@ -25,8 +26,9 @@ export default function CampaignTabs({ about, faq }: Props) {
           Contact
         </TabsTrigger> */}
       </TabsList>
-      {/* TODO: Implement markdown support */}
-      <TabsContent value="about">{about}</TabsContent>
+      <TabsContent value="about">
+        <RichTextReader content={about} />
+      </TabsContent>
       <TabsContent value="faq">
         <Accordion type="single" collapsible>
           {parsedFaq.map((faq, index) => (

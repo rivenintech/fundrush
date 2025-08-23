@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { RichTextEditor } from "@/components/slate-text-editor/rich-text-editor";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/ui/file-upload";
@@ -98,7 +99,7 @@ export function NewCampaignForm({ defaultValues, categories, submitFormAction }:
             <FormItem>
               <FormLabel>About</FormLabel>
               <FormControl>
-                <Textarea rows={10} placeholder="Describe your campaign in detail to potential donors." {...field} />
+                <RichTextEditor initialContent={field.value} onChange={(content) => field.onChange(content)} />
               </FormControl>
               <FormMessage />
             </FormItem>
