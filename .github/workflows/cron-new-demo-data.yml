@@ -1,0 +1,16 @@
+name: Insert New Demo Data to DB (Daily)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * *"
+
+jobs:
+  cron-demo-data:
+    name: Insert new demo data to DB
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send HTTP GET request to the endpoint
+        run: |
+          curl -X GET "https://fundrush.rivenintech.com/api/cron-demo-data" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
