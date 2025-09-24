@@ -72,6 +72,7 @@
   "devDependencies": {
     "@0no-co/graphqlsp": "^1.12.16",
     "@eslint/eslintrc": "^3",
+    "@faker-js/faker": "^10.0.0",
     "@graphql-codegen/cli": "^5.0.7",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@parcel/watcher": "^2.5.1",
