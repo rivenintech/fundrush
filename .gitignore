@@ -40,8 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# vscode
-.vscode
-
 # genereated files (codegen, etc.)
 src/__generated__/
